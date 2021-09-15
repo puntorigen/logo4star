@@ -1,13 +1,22 @@
 /*
-steps:
-1) get file puntorigen/logos/repos.json
-2) get all users that are stargazers of puntorigen/logo4star
-3) compare steps 1 and 2, and get new users
-4) for each new user, get the repos that are not forks and add them to 'tomake' obj
-5) create a subfolder 'repo'
-6) for each user within 'tomake' obj, create a subfolder 'repo/username'
-7) for each repo within 'tomake' obj, request a logo svg and save it as 'repo/username/repo.svg'
-8) for each svg, convert to png
-9) save step 2 as repo/repos.json
-10) push 'repo' folder to puntorigen/logos/ as new commit
+flow:
+1) user mark a star on repo puntorigen/logo4star
+2) schedule backend service monitors stargazers of logo4star
+    2.1) downloads file puntorigen/logo4star/'logos' branch /repos.json
+    2.2) get stargazers of logo4star
+        2.2.1) for each user, request their repo
+        2.2.2) for each repo, just mark repos that are no forks
+        2.2.3) build object with username->repos (non-foked)
+    2.3) compare serialized object from 2.2.3 with step 2.1. 
+    2.4) if step 2.3 is different, call puntorigen4u/generate-logo webook (workflow)
+        2.4.1) this will repeat the steps from step 2.2.
+        2.4.2) it will clone the branch 'logos' of puntorigen/logo4star
+        2.4.3) it will generate each missing logo defined on step 2.4.1.
+        2.4.4) it will save a new /repos.json from step 2.4.1.
+        2.4.5) it will push 'repo' folder contents to 'logos' branch of logo4star
+        2.4.6) it will call puntorigen/logo4star workflow webhook
+    
+logo4star workflow will:
+1) download the file puntorigen/logo4star/'logos' branch /repos.json
+2) read our file readme.md and add each repo found on the 'repos' file
 */

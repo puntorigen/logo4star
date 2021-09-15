@@ -1,10 +1,10 @@
 {
   "name": "logo4star",
   "version": "1.0.0",
-  "description": "A magical repo; add a beautiful logo to your repo with one line of code",
+  "description": "Updates the readme.md file with the generated logos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node index.js"
   },
   "repository": {
@@ -18,14 +18,14 @@
     "free",
     "logo"
   ],
-  "author": "Punto Origen",
+  "author": "Pablo Schaffner",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/puntorigen/logo4star/issues"
   },
   "homepage": "https://github.com/puntorigen/logo4star#readme",
-  "dependencies": {
-    "puppeteer": "^10.2.0",
-    "svg2png": "^4.1.1"
+  "devDependencies": {
+    "jest": "^27.2.0",
+    "markdown-magic": "^2.5.2"
   }
 }
